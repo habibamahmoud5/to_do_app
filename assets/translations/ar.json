@@ -4,5 +4,7 @@
   "full_name": "الاسم بالكامل",
   "enter_full_name": "أدخل اسمك بالكامل",
   "enter_name_error": "من فضلك أدخل اسمك",
-  "continue": "متابعة"
+  "continue": "متابعة",
+  "good_morning":"صباح الخير",
+  "ahmed":"أحمد"
 }

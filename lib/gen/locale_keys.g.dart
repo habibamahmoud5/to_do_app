@@ -9,4 +9,6 @@ abstract class LocaleKeys {
   static const enter_full_name = 'enter_full_name';
   static const enter_name_error = 'enter_name_error';
   static const continue_buttom = 'continue';
+  static const good_morning = 'good_morning';
+  static const ahmed = 'ahmed';
 }

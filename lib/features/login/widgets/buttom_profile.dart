@@ -2,10 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/gen/locale_keys.g.dart';
 
-class Buttom extends StatelessWidget {
+class ButtomProfile extends StatelessWidget {
   final VoidCallback onPressed;
   final String title;
-  const Buttom({super.key, required this.onPressed, required this.title});
+  const ButtomProfile({
+    super.key,
+    required this.onPressed,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {

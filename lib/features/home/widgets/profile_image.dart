@@ -5,14 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:to_do_app/features/login/widgets/buttom_profile.dart';
 
-class ProfileIcon extends StatefulWidget {
-  const ProfileIcon({super.key});
+class ProfileImage extends StatefulWidget {
+  const ProfileImage({super.key});
 
   @override
-  State<ProfileIcon> createState() => _ProfileIconState();
+  State<ProfileImage> createState() => _ProfileImageState();
 }
 
-class _ProfileIconState extends State<ProfileIcon> {
+class _ProfileImageState extends State<ProfileImage> {
   final picker = ImagePicker();
   XFile? photo;
   pickImageFormCamera() async {
@@ -57,14 +57,14 @@ class _ProfileIconState extends State<ProfileIcon> {
           );
         },
         child: CircleAvatar(
-          radius: 50,
+          radius: 30,
 
           backgroundImage: photo != null
               ? Image.file(File(photo?.path ?? "")).image
               : null,
-          backgroundColor: Color(0xffe8ecf5),
+          backgroundColor: Color(0xff515b92),
           child: photo == null
-              ? Icon(Icons.person, size: 45.sp, color: Color(0xff515b92))
+              ? Icon(Icons.person, size: 30.sp, color: Color(0xffe8ecf5))
               : null,
         ),
       ),

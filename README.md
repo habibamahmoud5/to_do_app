@@ -10,6 +10,7 @@ This project helps users organize their daily tasks through a clean, user-friend
   <img src="screenshots/english_login.png" width="200">
   <img src="screenshots/arabic_login.png" width="200">
   <img src="screenshots/language_option.png" width="200">
+  <img src="screenshots/home.png" width="200">
 </p>
 
 
@@ -19,3 +20,5 @@ This project helps users organize their daily tasks through a clean, user-friend
 
 ```bash
 dart run easy_localization:generate --source-dir ./assets/translations -f keys -o locale_keys.g.dart -O lib/gen
+
+dart run build_runner build --delete-conflicting-outputs

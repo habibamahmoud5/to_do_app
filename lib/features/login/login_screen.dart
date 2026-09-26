@@ -24,7 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        backgroundColor: const Color(0xFFF5F7FB),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 24.w),
@@ -41,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     20.verticalSpace,
                     Center(
                       child: Text(
-                        LocaleKeys.continue_buttom.tr(),
+                        LocaleKeys.create_profile.tr(),
 
                         style: const TextStyle(
                           fontSize: 30,
@@ -76,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomTextField(),
                     20.verticalSpace,
                     Buttom(
+                      title: LocaleKeys.continue_buttom.tr(),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           Navigator.pushReplacement(

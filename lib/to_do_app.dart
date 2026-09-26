@@ -17,6 +17,7 @@ class ToDoApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
+        theme: ThemeData(scaffoldBackgroundColor: Color(0xFFF5F7FB)),
         home: SplashScreen(),
       ),
     );
