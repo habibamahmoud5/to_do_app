@@ -10,7 +10,10 @@ This project helps users organize their daily tasks through a clean, user-friend
   <img src="screenshots/english_login.png" width="200">
   <img src="screenshots/arabic_login.png" width="200">
   <img src="screenshots/language_option.png" width="200">
-  <img src="screenshots/home.png" width="200">
+  <img src="screenshots/home_en.png" width="200">
+  <img src="screenshots/home_ar.png" width="200">
+  <img src="screenshots/add_task_en.png" width="200">
+  <img src="screenshots/add_task_ar.png" width="200">
 </p>
 
 

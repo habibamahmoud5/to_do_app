@@ -10,7 +10,7 @@ class Language extends StatelessWidget {
       alignment: AlignmentDirectional.topEnd,
       child: PopupMenuButton<Locale>(
         color: Colors.white,
-        icon: const Icon(Icons.language, color: Color(0xff515b92)),
+        icon: const Icon(Icons.language, color: Colors.black),
 
         onSelected: (Locale locale) {
           context.setLocale(locale);

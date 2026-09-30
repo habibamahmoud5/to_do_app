@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do_app/features/home/widgets/statistic_item.dart';
+import 'package:to_do_app/gen/locale_keys.g.dart';
 
 class TaskStatistics extends StatelessWidget {
   const TaskStatistics({super.key});
@@ -18,16 +20,16 @@ class TaskStatistics extends StatelessWidget {
 
       child: Row(
         children: [
-          const Expanded(
-            child: StatisticItem(number: '12', title: 'Tasks'),
+          Expanded(
+            child: StatisticItem(number: '12', title: LocaleKeys.tasks.tr()),
           ),
 
-          const Expanded(
-            child: StatisticItem(number: '5', title: 'Done'),
+          Expanded(
+            child: StatisticItem(number: '5', title: LocaleKeys.done.tr()),
           ),
 
-          const Expanded(
-            child: StatisticItem(number: '7', title: 'Pending'),
+          Expanded(
+            child: StatisticItem(number: '7', title: LocaleKeys.pending.tr()),
           ),
         ],
       ),

@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:to_do_app/features/core/utils/app_constants.dart';
 import 'package:to_do_app/features/home/home_screen.dart';
+import 'package:to_do_app/features/login/data/user_model.dart';
 import 'package:to_do_app/features/login/widgets/buttom.dart';
 import 'package:to_do_app/features/login/widgets/custom_text_field.dart';
 import 'package:to_do_app/features/login/widgets/language.dart';
@@ -17,6 +20,21 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  String? imagePath;
+  final TextEditingController nameController = TextEditingController();
+
+  void saveUserData(UserModel user) {
+    Hive.box<UserModel>(AppConstants.userBox)
+        .put(AppConstants.currentUser, user)
+        .then((value) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
+        })
+        .catchError((error) {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -36,7 +54,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Language(),
                     120.verticalSpace,
-                    ProfileIcon(),
+                    ProfileIcon(
+                      onImageSelected: (path) {
+                        setState(() {
+                          imagePath = path;
+                        });
+                      },
+                    ),
                     20.verticalSpace,
                     Center(
                       child: Text(
@@ -72,19 +96,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     10.verticalSpace,
-                    CustomTextField(),
+                    CustomTextField(controller: nameController),
                     20.verticalSpace,
                     Buttom(
                       title: LocaleKeys.continue_buttom.tr(),
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
-                            ),
-                          );
-                        }
+                        saveUserData(
+                          UserModel(
+                            name: nameController.text.trim(),
+                            image: imagePath ?? "",
+                          ),
+                        );
                       },
                     ),
                   ],

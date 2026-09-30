@@ -4,7 +4,35 @@
   "full_name": "الاسم بالكامل",
   "enter_full_name": "أدخل اسمك بالكامل",
   "enter_name_error": "من فضلك أدخل اسمك",
-  "continue": "متابعة",
+  "continue_buttom": "متابعة",
   "good_morning":"صباح الخير",
-  "ahmed":"أحمد"
+  "ahmed":"أحمد",
+  "tasks": "المهام",
+  "done": "مكتملة",
+  "pending": "معلقة",
+  "todays_tasks": "مهام اليوم",
+  "flutter_ui": "واجهة Flutter",
+  "build_register_screen": "إنشاء شاشة التسجيل",
+
+  "workout": "التمرين",
+  "gym_at_6_pm": "الذهاب إلى النادي الساعة 6 مساءً",
+
+  "meeting": "الاجتماع",
+  "team_sync": "اجتماع الفريق",
+
+  "read_book": "قراءة كتاب",
+  "atomic_habits": "العادات الذرية",
+  "in_progress": "قيد التنفيذ",
+   "task": "مهمة",
+
+
+  "add_task": "إضافة مهمة",
+  "task_title": "عنوان المهمة",
+  "description": "الوصف",
+  "time": "الوقت",
+  "date": "التاريخ",
+  "status": "الحالة",
+  "choose_color": "اختر اللون",
+  "save_task": "حفظ المهمة",
+  "Please_enter_description":"من فضلك ادخل النص"
 }

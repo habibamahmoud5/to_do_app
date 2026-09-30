@@ -6,13 +6,15 @@ import 'package:to_do_app/features/login/widgets/language.dart';
 import 'package:to_do_app/gen/locale_keys.g.dart';
 
 class HomeHeader extends StatelessWidget {
-  const HomeHeader({super.key});
+  final String name;
+  final String image;
+  const HomeHeader({super.key, required this.name, required this.image});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ProfileImage(),
+        ProfileImage(image: image),
         10.horizontalSpace,
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,7 +29,7 @@ class HomeHeader extends StatelessWidget {
             ),
 
             Text(
-              LocaleKeys.ahmed.tr(),
+              name,
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
             ),
           ],

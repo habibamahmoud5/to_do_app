@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:to_do_app/gen/locale_keys.g.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({super.key});
+  final TextEditingController controller;
+  const CustomTextField({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       keyboardType: TextInputType.name,
       textInputAction: TextInputAction.done,
 
       decoration: InputDecoration(
-        hintText: 'enter_full_name'.tr(),
+        hintText: LocaleKeys.enter_full_name.tr(),
 
         filled: true,
         fillColor: Colors.white,

@@ -6,7 +6,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:to_do_app/features/login/widgets/buttom_profile.dart';
 
 class ProfileIcon extends StatefulWidget {
-  const ProfileIcon({super.key});
+  final Function(String) onImageSelected;
+
+  const ProfileIcon({super.key, required this.onImageSelected});
 
   @override
   State<ProfileIcon> createState() => _ProfileIconState();
@@ -14,15 +16,31 @@ class ProfileIcon extends StatefulWidget {
 
 class _ProfileIconState extends State<ProfileIcon> {
   final picker = ImagePicker();
+
   XFile? photo;
-  pickImageFormCamera() async {
-    photo = await picker.pickImage(source: ImageSource.camera);
-    setState(() {});
+
+  Future<void> pickImageFormCamera() async {
+    final XFile? image = await picker.pickImage(source: ImageSource.camera);
+
+    if (image != null) {
+      setState(() {
+        photo = image;
+      });
+
+      widget.onImageSelected(image.path);
+    }
   }
 
-  pickImageFormGallery() async {
-    photo = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {});
+  Future<void> pickImageFormGallery() async {
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        photo = image;
+      });
+
+      widget.onImageSelected(image.path);
+    }
   }
 
   @override
@@ -35,19 +53,22 @@ class _ProfileIconState extends State<ProfileIcon> {
             builder: (context) => Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   ButtomProfile(
                     onPressed: () {
                       Navigator.pop(context);
-                      pickImageFormCamera();
+                      pickImageFormGallery();
                     },
-                    title: 'Galary',
+                    title: 'Gallery',
                   ),
+
                   20.verticalSpace,
+
                   ButtomProfile(
                     onPressed: () {
                       Navigator.pop(context);
-                      pickImageFormGallery();
+                      pickImageFormCamera();
                     },
                     title: 'Camera',
                   ),
@@ -57,14 +78,11 @@ class _ProfileIconState extends State<ProfileIcon> {
           );
         },
         child: CircleAvatar(
-          radius: 50,
-
-          backgroundImage: photo != null
-              ? Image.file(File(photo?.path ?? "")).image
-              : null,
-          backgroundColor: Color(0xffe8ecf5),
+          radius: 50.r,
+          backgroundImage: photo != null ? FileImage(File(photo!.path)) : null,
+          backgroundColor: const Color(0xffe8ecf5),
           child: photo == null
-              ? Icon(Icons.person, size: 45.sp, color: Color(0xff515b92))
+              ? Icon(Icons.person, size: 45.sp, color: const Color(0xff515b92))
               : null,
         ),
       ),

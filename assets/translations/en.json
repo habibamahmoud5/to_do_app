@@ -5,8 +5,36 @@
   "enter_full_name": "Enter your full name",
   "enter_name_error": "Please enter your name",
   "continue_buttom": "Continue",
-  "name":"habiba",
+  
   "good_morning":"Good Morning",
-  "ahmed":"Ahmed"
+  "ahmed":"Ahmed",
+  "tasks": "Tasks",
+  "done": "Done",
+  "pending": "Pending",
+  "todays_tasks": "Today's Tasks",
+  "flutter_ui": "Flutter UI",
+  "build_register_screen": "Build Register Screen",
+
+  "workout": "Workout",
+  "gym_at_6_pm": "Gym at 6 PM",
+
+  "meeting": "Meeting",
+  "team_sync": "Team Sync",
+
+  "read_book": "Read Book",
+  "atomic_habits": "Atomic Habits",
+  "in_progress": "In Progress",
+  "task": "Task",
+
+  "add_task": "Add Task",
+  "task_title": "Task Title",
+  "description": "Description",
+  "time": "Time",
+  "date": "Date",
+  "status": "Status",
+  "choose_color": "Choose Color",
+  "save_task": "Save Task",
+  "Please_enter_description":"Please enter description"
+  
 
 }
