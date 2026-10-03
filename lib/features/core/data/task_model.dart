@@ -15,11 +15,18 @@ class TaskModel {
 
   @HiveField(3)
   int color;
+  @HiveField(4)
+  String date;
+
+  @HiveField(5)
+  String time;
 
   TaskModel({
     required this.title,
     required this.subtitle,
     required this.status,
     required this.color,
+    required this.date,
+    required this.time,
   });
 }

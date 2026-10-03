@@ -4,12 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do_app/gen/locale_keys.g.dart';
 
 class TaskColorPicker extends StatelessWidget {
-  final int selectedColor;
+  final int? selectedColor;
   final ValueChanged<int> onColorSelected;
 
   const TaskColorPicker({
     super.key,
-    required this.selectedColor,
+    this.selectedColor,
     required this.onColorSelected,
   });
 
@@ -50,9 +50,12 @@ class TaskColorPicker extends StatelessWidget {
                   color: Color(color),
                   shape: BoxShape.circle,
                   border: isSelected
-                      ? Border.all(color: Color(0xFFF5F7FB), width: 2)
+                      ? Border.all(color: Colors.white, width: 3)
                       : null,
                 ),
+                child: isSelected
+                    ? const Icon(Icons.check, color: Colors.white, size: 20)
+                    : null,
               ),
             );
           }).toList(),

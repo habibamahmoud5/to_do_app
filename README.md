@@ -14,6 +14,7 @@ This project helps users organize their daily tasks through a clean, user-friend
   <img src="screenshots/home_ar.png" width="200">
   <img src="screenshots/add_task_en.png" width="200">
   <img src="screenshots/add_task_ar.png" width="200">
+  <img src="screenshots/Screenshot_1790952824.png" width="200">
 </p>
 
 

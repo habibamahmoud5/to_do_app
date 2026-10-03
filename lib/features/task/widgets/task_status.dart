@@ -4,23 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do_app/gen/locale_keys.g.dart';
 
 class TaskStatusDropdown extends StatelessWidget {
-  final String selectedStatus;
+  final String? selectedStatus;
   final ValueChanged<String?> onChanged;
 
   const TaskStatusDropdown({
     super.key,
-    required this.selectedStatus,
+    this.selectedStatus,
     required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    const statuses = ['pending', 'in_progress', 'done'];
-
-    final currentStatus = statuses.contains(selectedStatus)
-        ? selectedStatus
-        : 'pending';
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -45,7 +39,8 @@ class TaskStatusDropdown extends StatelessWidget {
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
-              value: currentStatus,
+              value: selectedStatus,
+              hint: Text(LocaleKeys.status.tr()),
               isExpanded: true,
 
               icon: const Icon(

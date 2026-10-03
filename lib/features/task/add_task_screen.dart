@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
+import 'package:to_do_app/features/core/data/task_model.dart';
+import 'package:to_do_app/features/core/utils/app_constants.dart';
 import 'package:to_do_app/features/login/widgets/buttom.dart';
 import 'package:to_do_app/features/login/widgets/language.dart';
 import 'package:to_do_app/features/task/widgets/task_color_picker.dart';
@@ -16,10 +19,23 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-  String selectedStatus = 'Pending';
-  int selectedColor = 0xff2196F3;
-  final TextEditingController dateController = TextEditingController();
+  int? selectedColor;
+  String? taskStatus;
+
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController subTitleController = TextEditingController();
   final TextEditingController timeController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    subTitleController.dispose();
+    timeController.dispose();
+    dateController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -55,14 +71,21 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
               5.verticalSpace,
-              TaskTextFields(fillColor: Colors.white),
+              TaskTextFields(
+                fillColor: Colors.white,
+                controller: titleController,
+              ),
               10.verticalSpace,
               Text(
                 LocaleKeys.description.tr(),
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
               5.verticalSpace,
-              TaskTextFields(fillColor: Colors.white, lines: 4),
+              TaskTextFields(
+                fillColor: Colors.white,
+                lines: 4,
+                controller: subTitleController,
+              ),
               10.verticalSpace,
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,12 +162,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
               10.verticalSpace,
               TaskStatusDropdown(
-                selectedStatus: selectedStatus,
+                selectedStatus: taskStatus,
                 onChanged: (value) {
-                  if (value == null) return;
-
                   setState(() {
-                    selectedStatus = value;
+                    taskStatus = value;
                   });
                 },
               ),
@@ -159,7 +180,35 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
 
               40.verticalSpace,
-              Buttom(onPressed: () {}, title: LocaleKeys.save_task.tr()),
+              Buttom(
+                onPressed: () async {
+                  if (titleController.text.trim().isEmpty) {
+                    return;
+                  }
+
+                  if (taskStatus == null) {
+                    return;
+                  }
+
+                  if (selectedColor == null) {
+                    return;
+                  }
+
+                  final task = TaskModel(
+                    title: titleController.text.trim(),
+                    subtitle: subTitleController.text.trim(),
+                    status: taskStatus!,
+                    color: selectedColor!,
+                    date: dateController.text,
+                    time: timeController.text,
+                  );
+
+                  await Hive.box<TaskModel>(AppConstants.tasksBox).add(task);
+
+                  Navigator.pop(context);
+                },
+                title: LocaleKeys.save_task.tr(),
+              ),
             ],
           ),
         ),

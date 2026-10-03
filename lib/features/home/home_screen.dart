@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:to_do_app/features/core/data/task_model.dart';
 import 'package:to_do_app/features/core/utils/app_constants.dart';
 import 'package:to_do_app/features/home/widgets/add_task_buttom.dart';
 import 'package:to_do_app/features/home/widgets/home_header.dart';
@@ -25,40 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
     ).get(AppConstants.currentUser);
   }
 
-  final tasks = [
-    (
-      title: LocaleKeys.flutter_ui.tr(),
-      subtitle: LocaleKeys.build_register_screen.tr(),
-      status: LocaleKeys.pending.tr(),
-      statusColor: const Color(0xff2196F3),
-      statusBackground: const Color(0xffE3F2FD),
-      indicatorColor: const Color(0xff2196F3),
-    ),
-    (
-      title: LocaleKeys.workout.tr(),
-      subtitle: LocaleKeys.gym_at_6_pm.tr(),
-      status: LocaleKeys.done.tr(),
-      statusColor: const Color(0xff4CAF50),
-      statusBackground: const Color(0xffE8F5E9),
-      indicatorColor: const Color(0xff4CAF50),
-    ),
-    (
-      title: LocaleKeys.meeting.tr(),
-      subtitle: LocaleKeys.team_sync.tr(),
-      status: LocaleKeys.in_progress.tr(),
-      statusColor: const Color(0xffff9800),
-      statusBackground: const Color(0xfffff3e0),
-      indicatorColor: const Color(0xffff9800),
-    ),
-    (
-      title: LocaleKeys.read_book.tr(),
-      subtitle: LocaleKeys.atomic_habits.tr(),
-      status: LocaleKeys.pending.tr(),
-      statusColor: const Color(0xff9C27B0),
-      statusBackground: const Color(0xffF3E5F5),
-      indicatorColor: const Color(0xff9C27B0),
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -95,25 +63,45 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               15.verticalSpace,
-
               Expanded(
-                child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    final task = tasks[index];
+                child: ValueListenableBuilder(
+                  valueListenable: Hive.box<TaskModel>(
+                    AppConstants.tasksBox,
+                  ).listenable(),
 
-                    return TaskCard(
-                      title: task.title.tr(),
-                      subtitle: task.subtitle.tr(),
-                      status: task.status.tr(),
-                      statusColor: task.statusColor,
-                      statusBackground: task.statusBackground,
-                      indicatorColor: task.indicatorColor,
+                  builder: (context, Box<TaskModel> box, _) {
+                    final tasks = box.values.toList();
+
+                    if (tasks.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'No tasks yet',
+                          style: TextStyle(fontSize: 16.sp, color: Colors.grey),
+                        ),
+                      );
+                    }
+
+                    return ListView.separated(
+                      itemBuilder: (context, index) {
+                        final task = tasks[index];
+
+                        return TaskCard(
+                          title: task.title,
+                          subtitle: task.subtitle,
+                          status: task.status.tr(),
+                          statusColor: Color(task.color),
+                          statusBackground: Color(task.color).withOpacity(0.1),
+                          indicatorColor: Color(task.color),
+                        );
+                      },
+
+                      separatorBuilder: (context, index) {
+                        return 12.verticalSpace;
+                      },
+
+                      itemCount: tasks.length,
                     );
                   },
-                  separatorBuilder: (context, index) {
-                    return 12.verticalSpace;
-                  },
-                  itemCount: tasks.length,
                 ),
               ),
             ],
