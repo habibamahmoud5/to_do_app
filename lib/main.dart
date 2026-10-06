@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:to_do_app/features/core/data/task_model.dart';
 import 'package:to_do_app/features/core/utils/app_constants.dart';
 import 'package:to_do_app/features/login/data/user_model.dart';
-
 import 'package:to_do_app/to_do_app.dart';
 
 void main() async {

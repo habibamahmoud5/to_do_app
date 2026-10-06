@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:to_do_app/features/counter/counter_screen.dart';
+import 'package:to_do_app/features/counter/cubit/counter_cubit.dart';
 import 'package:to_do_app/features/splash/splash_screen.dart';
 
 class ToDoApp extends StatelessWidget {
@@ -18,7 +21,12 @@ class ToDoApp extends StatelessWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         theme: ThemeData(scaffoldBackgroundColor: Color(0xFFF5F7FB)),
+
         home: SplashScreen(),
+        // BlocProvider(
+        //   create: (context) => CounterCubit(),
+        //   child: CounterScreen(),
+        // ),
       ),
     );
   }

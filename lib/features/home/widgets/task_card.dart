@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:to_do_app/features/counter/counter_screen.dart';
+import 'package:to_do_app/features/counter/cubit/counter_cubit.dart';
 
 class TaskCard extends StatelessWidget {
   final String title;
@@ -102,10 +105,24 @@ class TaskCard extends StatelessWidget {
             ),
           ),
 
-          Icon(
-            Icons.chevron_right_rounded,
-            size: 28.sp,
-            color: const Color(0xff555555),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (context) => CounterCubit(),
+                    child: const CounterScreen(),
+                  ),
+                ),
+              );
+            },
+
+            child: Icon(
+              Icons.chevron_right_rounded,
+              size: 28.sp,
+              color: const Color(0xff555555),
+            ),
           ),
         ],
       ),
